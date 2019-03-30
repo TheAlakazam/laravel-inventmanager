@@ -15,7 +15,7 @@ class Item extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
-            $table->string('Item Description');
+            $table->string('Item_Description');
             $table->bigInteger('Stock');
             $table->integer('Purchased');
             $table->integer('Issued');

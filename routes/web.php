@@ -23,3 +23,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/inventory', 'ItemController@index')->name('inventory');
+Route::get('/issue', 'BorrowController@create_issue')->name('issue');
+Route::get('/return', 'BorrowController@create_return')->name('return');

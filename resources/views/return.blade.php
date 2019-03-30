@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Issue Item
+                    Return Item
                 </div>
                 <div class="card-body">
                     <form method="POST">
@@ -29,12 +29,8 @@
                             <input type="number" class="form-control" id="quantity">
                         </div>
                         <div class="form-group">
-                            <label for="dateIssue">Date of Issue</label>
+                            <label for="dateIssue">Date of Return</label>
                             <input type="date" class="form-control" value="{{ date('Y-m-d') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="reason">Reason</label>
-                            <textarea rows="8" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

@@ -36,8 +36,8 @@
                         <a href="#" class="nav-item nav-link">{{__('Dashboard')}}</a>
                         <a href="{{ route('inventory') }}" class="nav-item nav-link">{{__('Inventory')}}</a>
                         <a href="#" class="nav-item nav-link">{{__('Request')}}</a>
-                        <a href="#" class="nav-item nav-link">{{__('Issue')}}</a>
-                        <a href="#" class="nav-item nav-link">{{__('Return')}}</a>
+                        <a href="{{ route('issue') }}" class="nav-item nav-link">{{__('Issue')}}</a>
+                        <a href="{{ route('return') }}" class="nav-item nav-link">{{__('Return')}}</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
