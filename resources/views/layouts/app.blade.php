@@ -23,9 +23,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <div class="navbar-brand">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <a href="#" class="nav-item nav-link">{{__('Dashboard')}}</a>
-                        <a href="#" class="nav-item nav-link">{{__('Inventory')}}</a>
+                        <a href="{{ route('inventory') }}" class="nav-item nav-link">{{__('Inventory')}}</a>
                         <a href="#" class="nav-item nav-link">{{__('Request')}}</a>
                         <a href="#" class="nav-item nav-link">{{__('Issue')}}</a>
                         <a href="#" class="nav-item nav-link">{{__('Return')}}</a>
