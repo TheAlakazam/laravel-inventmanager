@@ -17,9 +17,9 @@ class Item extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->string('Item_Description');
             $table->bigInteger('Stock');
-            $table->integer('Purchased');
-            $table->integer('Issued');
-            $table->integer('Returned');
+            $table->integer('Purchased')->default(0);
+            $table->integer('Issued')->default(0);
+            $table->integer('Returned')->default(0);
         });
     }
 

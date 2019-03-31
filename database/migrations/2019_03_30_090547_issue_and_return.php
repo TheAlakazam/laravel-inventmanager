@@ -15,16 +15,16 @@ class IssueAndReturn extends Migration
     {
         Schema::create('borrow', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('Item ID');
-            $table->foreign('Item ID')->references('id')->on('items');
-            $table->string('Item Description');
-            $table->bigInteger('Borrower ID');
+            $table->bigInteger('Item_ID');
+            $table->foreign('Item_ID')->references('id')->on('items');
+            $table->string('Item_Description');
+            $table->bigInteger('Borrower_ID');
             $table->bigInteger('Quantity');
-            $table->date('Issue Date');
-            $table->date('Return Date')->nullable();
-            $table->string('Reason');
-            $table->bigInteger('Issuer ID');
-            $table->foreign('Issuer ID')->references('id')->on('users');
+            $table->date('Issue_Date');
+            $table->date('Return_Date')->nullable();
+            $table->string('Reason')->default("");
+            $table->bigInteger('Issuer_ID')->unsigned();
+            $table->foreign('Issuer_ID')->references('id')->on('users');
             $table->timestamps();
         });
     }

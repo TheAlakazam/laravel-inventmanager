@@ -9,10 +9,11 @@
                     Issue Item
                 </div>
                 <div class="card-body">
-                    <form method="POST">
+                    <form method="POST" action="{{ route('issue_store') }}">
+                        @csrf
                         <div class="form-group">
                             <label for="itemSelect">Item</label>
-                            <select id="itemSelect" class="form-control">
+                            <select id="itemSelect" class="form-control" name="itemSelect" required>
                                 <?php
                                 foreach ($items as $item) {
                                     echo("<option>" . $item . "</option>");
@@ -22,19 +23,19 @@
                         </div>
                         <div class="form-group">
                             <label for="borrowerID">Borrower ID</label>
-                            <input type="text" class="form-control" id="borrowerID">
+                            <input type="text" class="form-control" id="borrowerID" name="borrowerID" required>
                         </div>
                         <div class="form-group">
                             <label for="quantity">Quantity</label>
-                            <input type="number" class="form-control" id="quantity">
+                            <input type="number" class="form-control" id="quantity" name="quantity" required>
                         </div>
                         <div class="form-group">
                             <label for="dateIssue">Date of Issue</label>
-                            <input type="date" class="form-control" value="{{ date('Y-m-d') }}">
+                            <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="dateIssue" required>
                         </div>
                         <div class="form-group">
                             <label for="reason">Reason</label>
-                            <textarea rows="8" class="form-control"></textarea>
+                            <textarea rows="8" class="form-control" name="reason"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

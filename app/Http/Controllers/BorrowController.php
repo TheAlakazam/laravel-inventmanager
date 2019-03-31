@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Borrow;
+use App\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BorrowController extends Controller
 {
@@ -46,9 +48,31 @@ class BorrowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store_issue(Request $request)
     {
         //
+        $this->validate($request, [
+            'borrowerID' => 'required',
+            'itemSelect' => 'required',
+            'quantity' => 'required',
+            'dateIssue' => 'required',
+        ]);
+        $issue = new Borrow;
+        $issue->Borrower_ID = $request->borrowerID;
+        $issue->Item_Description = $request->itemSelect;
+        // echo $request->itemSelect;
+        $issue->Issue_Date = $request->dateIssue;
+        $issue->Quantity = $request->quantity;
+        $item_id = DB::table('items')->select('id')->where('Item_Description', '=', $request->itemSelect)->pluck('id')->first();
+        // $issue->Item_ID = $item_id;
+        $issue->Item_ID = $item_id;
+        $item = Item::find($item_id);
+        if(isset($request->reason)){
+            $issue->Request = $request->reason;
+        }
+        $issue->Issuer_ID = Auth::user()->id;
+        $issue->save();
+        return redirect()->back();
     }
 
     /**

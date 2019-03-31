@@ -9,6 +9,10 @@ class Borrow extends Model
     //
     protected $table = 'borrow';
     protected $fillable = [
-        'Item ID', 'Borrower ID', 'Quantity', 'Issue Date', 'Return Date', 'Reason'
+        'Item_ID', 'Borrower_ID', 'Quantity', 'Issue_Date', 'Return_Date', 'Reason', 'Item_Description', 'Issuer_ID'
+    ];
+    protected $casts = [
+        'Issue_Date' => 'datetime',
+        'Return_Date' => 'datetime',
     ];
 }
