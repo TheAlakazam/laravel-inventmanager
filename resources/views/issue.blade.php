@@ -4,6 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if(Session::has('msg'))
+            <div class="alert alert-danger">
+                <strong>{{ session()->get('msg') }}</strong>
+            </div>
+            @endif
+            @if(Session::has('success'))
+            <div class="alert alert-success">
+                <strong>{{ session()->get('success') }}</strong>
+            </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     Issue Item

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class BorrowController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,19 +64,22 @@ class BorrowController extends Controller
         $issue = new Borrow;
         $issue->Borrower_ID = $request->borrowerID;
         $issue->Item_Description = $request->itemSelect;
-        // echo $request->itemSelect;
         $issue->Issue_Date = $request->dateIssue;
         $issue->Quantity = $request->quantity;
         $item_id = DB::table('items')->select('id')->where('Item_Description', '=', $request->itemSelect)->pluck('id')->first();
-        // $issue->Item_ID = $item_id;
         $issue->Item_ID = $item_id;
         $item = Item::find($item_id);
         if(isset($request->reason)){
             $issue->Request = $request->reason;
         }
+        if($item->Stock - $item->Issued < $request->quantity){
+            return redirect()->back()->with('msg', 'Not enough stock');
+        }
+        $item->Issued += $request->quantity;
         $issue->Issuer_ID = Auth::user()->id;
         $issue->save();
-        return redirect()->back();
+        $item->save();
+        return redirect()->back()->with('success', 'Item issued successfully');
     }
 
     /**
