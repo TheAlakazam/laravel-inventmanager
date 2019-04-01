@@ -33,11 +33,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a href="#" class="nav-item nav-link">{{__('Dashboard')}}</a>
-                        <a href="{{ route('inventory') }}" class="nav-item nav-link">{{__('Inventory')}}</a>
-                        <a href="#" class="nav-item nav-link">{{__('Request')}}</a>
-                        <a href="{{ route('issue') }}" class="nav-item nav-link">{{__('Issue')}}</a>
-                        <a href="{{ route('return') }}" class="nav-item nav-link">{{__('Return')}}</a>
+                        @guest
+                        @else
+                            <a href="#" class="nav-item nav-link">{{__('Dashboard')}}</a>
+                            <a href="{{ route('inventory') }}" class="nav-item nav-link">{{__('Inventory')}}</a>
+                            <a href="#" class="nav-item nav-link">{{__('Request')}}</a>
+                            <a href="{{ route('issue') }}" class="nav-item nav-link">{{__('Issue')}}</a>
+                            <a href="{{ route('return') }}" class="nav-item nav-link">{{__('Return')}}</a>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
