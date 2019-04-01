@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +29,9 @@ Route::get('/issue', 'BorrowController@create_issue')->name('issue');
 Route::get('/return', 'BorrowController@create_return')->name('return');
 Route::post('/issue', 'BorrowController@store_issue')->name('issue_store');
 Route::post('/return', 'BorrowController@update')->name('return_item');
+Route::get('/admin/', function () {
+    return view('admin.auth.login');
+})->name('admin.login');
+Route::group(['prefix' => 'admin', 'middleware' => 'admin' ], function () {
+    Route::get('home', 'HomeController@admin')->name('admin.home');
+});

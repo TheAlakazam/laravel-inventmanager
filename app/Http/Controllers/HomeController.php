@@ -30,4 +30,9 @@ class HomeController extends Controller
         $items_warning = DB::table('items')->select(['id', 'Item_Description', 'Current_Stock'])->whereRaw('Current_Stock BETWEEN 0.1 * (Stock + Purchased) AND 0.2 * (Stock + Purchased)')->get();
         return view('dashboard', ['issued' => $issued, 'items_warning' => $items_warning, 'items_danger' => $items_danger]);
     }
+
+    public function admin()
+    {
+        return view('admin.dashboard');
+    }
 }
