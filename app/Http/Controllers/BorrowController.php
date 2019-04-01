@@ -65,14 +65,14 @@ class BorrowController extends Controller
         $issue->Borrower_ID = $request->borrowerID;
         $issue->Item_Description = $request->itemSelect;
         $issue->Issue_Date = $request->dateIssue;
-        $issue->Quantity = $request->quantity;
+        $issue->Quantity_Issued = $request->quantity;
         $item_id = DB::table('items')->select('id')->where('Item_Description', '=', $request->itemSelect)->pluck('id')->first();
         $issue->Item_ID = $item_id;
         $item = Item::find($item_id);
         if(isset($request->reason)){
             $issue->Request = $request->reason;
         }
-        if($item->Stock - $item->Issued < $request->quantity){
+        if($item->Current_Stock < $request->quantity){
             return redirect()->back()->with('msg', 'Not enough stock');
         }
         $item->Issued += $request->quantity;
@@ -108,12 +108,31 @@ class BorrowController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Borrow  $borrow
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Borrow $borrow)
+    public function update(Request $request)
     {
         //
+        $this->validate($request, [
+            'itemSelect' => 'required',
+            'borrowerID' => 'required',
+            'quantity' => 'required',
+            'dateReturn' => 'required'
+        ]);
+        $return = Borrow::where('Item_Description', '=', $request->itemSelect)->where('Borrower_ID', '=', $request->borrowerID)->first();
+        if(!$return instanceof Borrow){
+            return redirect()->back()->with('msg', 'Record not found');
+        }
+        if($return->Quantity_Issued < $request->quantity){
+            return redirect()->back()->with('msg', 'Please check quantity, exceeds number of items issued');
+        }
+        $return->Quantity_Returned = $request->quantity;
+        $return->Return_Date = $request->dateReturn;
+        $item = Item::find($return->Item_ID);
+        $item->Returned += $request->quantity;
+        $item->save();
+        $return->save();
+        return redirect()->back()->with('success', 'Item returned successfully');
     }
 
     /**

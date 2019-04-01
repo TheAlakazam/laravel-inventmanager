@@ -19,13 +19,13 @@ class IssueAndReturn extends Migration
             $table->foreign('Item_ID')->references('id')->on('items');
             $table->string('Item_Description');
             $table->bigInteger('Borrower_ID');
-            $table->bigInteger('Quantity');
+            $table->bigInteger('Quantity_Issued');
+            $table->bigInteger('Quantity_Returned')->default(0);
             $table->date('Issue_Date');
             $table->date('Return_Date')->nullable();
             $table->string('Reason')->default("");
             $table->bigInteger('Issuer_ID')->unsigned();
             $table->foreign('Issuer_ID')->references('id')->on('users');
-            $table->timestamps();
         });
     }
 

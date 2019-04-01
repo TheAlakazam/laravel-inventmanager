@@ -20,6 +20,7 @@ class Item extends Migration
             $table->integer('Purchased')->default(0);
             $table->integer('Issued')->default(0);
             $table->integer('Returned')->default(0);
+            $table->bigInteger('Current_Stock')->virtualAs('Stock + Purchased - Issued + Returned');
         });
     }
 
